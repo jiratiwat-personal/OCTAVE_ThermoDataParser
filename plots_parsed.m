@@ -2,7 +2,7 @@ function [P,Q,R]= plots_parsed(Cp,S,H,H_down,H_up,T,compound)
  
  
  name_compound=strrep(compound,'_','-');
- figure('Name',sprintf('Thermodynamic Plots',1),'WindowState','Maximized') 
+ figure('Name',sprintf('Thermodynamic Plots',1)) 
  subplot(1,3,1);
  P=plot(T,Cp,'linewidth',2,'color','blue');
  grid on
@@ -26,8 +26,8 @@ function [P,Q,R]= plots_parsed(Cp,S,H,H_down,H_up,T,compound)
  title(sprintf('Enthalpy vs Temperature of %s ',name_compound));
  hold on
  
- plot(T,H_down,'linewidth',2,'color','#FFB100');
- plot(T,H_up,'linewidth',2,'color','#F31E00');
+ plot(T,H_down,'linewidth',2,'color','magenta');
+ plot(T,H_up,'linewidth',2,'color','red');
 
  hold off
  

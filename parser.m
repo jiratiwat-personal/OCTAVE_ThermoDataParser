@@ -6,14 +6,14 @@ function [temp,coeff,compound,inputs,inputs_ex]=parser(file)
     %q=strsplit(line_1,'G');                                                     %split string by using "G" as the indicator
     %s=strsplit(q{1},' ');                                                       %using the space as a delimiter
     r=strsplit(line_1,' ');
-    compound=convertCharsToStrings(r{1});                                       %convert character vectors to character arrays
+    compound=(r{1});                                       %convert character vectors to character arrays
 
     %r=strsplit(q{2},' ');
     temp_ll=str2double(r{7});
     temp_lh=str2double(r{8});
     temp_lm=str2double(r{9});
-    temp=table(temp_ll,temp_lm,temp_lh,'VariableNames',{'1','2','3'});           %print basic table for data display
-    rows2vars(temp);                                                            %reorient temp as that the value contained in temp turns into variables
+    temp={temp_ll,temp_lm,temp_lh,'VariableNames'};           %print basic table for data display
+    %%rows2vars(temp);                                                            %reorient temp as that the value contained in temp turns into variables
     %%
     c={};
     x=fgetl(file);
@@ -51,7 +51,7 @@ function [temp,coeff,compound,inputs,inputs_ex]=parser(file)
     [coeff]=[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14];                   %when assign to matlab, using ; between value will direct the vector to column, without it will be row
     %coeff_up=[c1 c2 c3 c4 c5 c6_up c7 c8 c9 c10 c11 c12 c13_up c14];
     %coeff_down=[c1 c2 c3 c4 c5 c6_down c7 c8 c9 c10 c11 c12 c13_down c14];
-    T=table(c',coeff','VariableNames',{'Coefficient','Value'});              %use a symbol ' to transpose
+    T={c',coeff'};              %use a symbol ' to transpose
     
     inputs=[coeff,temp_ll,temp_lm,temp_lh];
     inputs_ex=[c6_down,c6_up,c13_down,c13_up];
