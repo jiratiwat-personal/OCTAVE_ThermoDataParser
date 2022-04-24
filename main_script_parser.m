@@ -8,6 +8,39 @@ disp('-- Sensitivity Analysis initializer for Thermodynamic data ---')
 disp('--------------------------------------------------------------')
 prompt=('Enter thermodynamic data file name: ');
 thermoFile=input(prompt,'s');
+##%------------------parse everyline of the file to cell A---------------------
+##fileRec=fopen(thermoFile,'r');
+##countL=1;
+##tlineL=fgetl(fileRec);
+##A{countL} = tlineL;
+##y='END';
+##while ischar(tlineL)
+##   x=tlineL(1:3);
+##   countL=countL+1;
+##   tlineL=fgetl(fileRec);
+##   tempExcept=strsplit(tlineL);
+##    if x==y
+##        break
+##    end
+##    if tempExcept{1} = y                                    %this should be used instead 
+##        continue
+##    else
+##        A{countL}=tlineL;                                          %otherwise count the number of line and devide by 4 to get the number of compounds
+##    end
+##end
+##fclose(fileRec);
+##%------------------write A cell into files-----------------------------------
+##fileRec = fopen('textRec.txt','w');
+##for i = 1:numel(A)
+##    if i == size(A);
+##      fprintf(fileRec,'%s',A{i});
+##      break
+##    else
+##      fprintf(fileRec,'%s\n',A{i});
+##    end
+##end
+
+
 file=fopen(thermoFile,'r');             %fopen is to return the integer number as the file identifier "r" to define that this is for reading
 fgetl(file);                                           %fgetl is to read only the first line of the file
 temp_data=fgetl(file);               
@@ -16,6 +49,8 @@ t=strsplit(temp_data,' ');                             %strsplit is to split.
 temp_gl=str2double(t{2});                              %global low, medium and high are now extracted to array t and converted to double precision numbers using str2double function
 temp_gm=str2double(t{3});
 temp_gh=str2double(t{4});
+
+
 %------------------avoiding next three lines-------------------------------
 for i=1:3                                              %avoiding first 3 lines using for loop for n = 3
     fgetl(file);
@@ -44,16 +79,21 @@ fseek(file,m,'bof');                                    %set the position of the
 %----------------taking input from the user--------------------------------
 prompt=('Enter the species name: ');
 x=input(prompt,'s');
+
+%--------------Take the input species name and search through-------------
+
+
 %% ========================================================================
 for i=1:nos
 
     [temp,coeff,compound,inputs,inputs_ex]=parser(file);          %calling function
     [Cp,H,H_up,H_down,S]=thermo_calculator(inputs,inputs_ex);                %calling function
-    T=inputs(15):inputs(17);                            %temperature range
+    T=inputs(15):inputs(17);                            %temperature rangeTherm_N2O_NH3SCR-new.txt
 
     if strcmpi(x,compound)                              %compare strings (case insensitive)
         [P,Q,R]= plots_parsed(Cp,S,H,H_down,H_up,T,compound);
+        lineSpecies=i;
     end
-
 end
+
 
