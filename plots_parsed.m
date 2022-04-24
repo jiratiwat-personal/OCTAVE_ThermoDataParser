@@ -19,17 +19,17 @@ function [P,Q,R]= plots_parsed(Cp,S,H,H_down,H_up,T,compound)
  
  
  subplot(1,3,3);
- R=plot(T,H,'linewidth',2,'color','yellow');
+ R=plot(T,H,'linewidth',2,'color','black');
  grid on
  xlabel('Temperature');
  ylabel('Enthalpy [J/(mol*K)]');
  title(sprintf('Enthalpy vs Temperature of %s ',name_compound));
  hold on
  
- plot(T,H_down,'linewidth',2,'color','magenta');
+ plot(T,H_down,'linewidth',2,'color','blue');
  plot(T,H_up,'linewidth',2,'color','red');
  
- h=legend("Original value","Increased value","Decrease value")
+ h=legend("Original","Decrement","Increment")
  
  hold off
  
