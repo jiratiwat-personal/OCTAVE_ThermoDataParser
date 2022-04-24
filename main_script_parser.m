@@ -4,9 +4,11 @@ clear all                                              % Clear command history
 close all                                              % Closes all windows
 clc                                                    %Clears command window
 disp('--------------------------------------------------------------')
-disp('----------------Thermodynamic data analyser-------------------')
+disp('-- Sensitivity Analysis initializer for Thermodynamic data ---')
 disp('--------------------------------------------------------------')
-file=fopen('Therm_N2O_NH3SCR-new.txt','r');             %fopen is to return the integer number as the file identifier "r" to define that this is for reading
+prompt=('Enter thermodynamic data file name: ');
+thermoFile=input(prompt,'s');
+file=fopen(thermoFile,'r');             %fopen is to return the integer number as the file identifier "r" to define that this is for reading
 fgetl(file);                                           %fgetl is to read only the first line of the file
 temp_data=fgetl(file);               
 %------------Global temperature--------------------------------------------

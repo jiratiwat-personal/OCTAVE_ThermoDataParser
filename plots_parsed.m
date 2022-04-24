@@ -29,7 +29,7 @@ function [P,Q,R]= plots_parsed(Cp,S,H,H_down,H_up,T,compound)
  plot(T,H_down,'linewidth',2,'color','blue');
  plot(T,H_up,'linewidth',2,'color','red');
  
- h=legend("Original","Decrement","Increment")
+ h=legend("Original","Decrement","Increment");
  
  hold off
  
