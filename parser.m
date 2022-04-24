@@ -52,7 +52,6 @@ function [temp,coeff,compound,inputs,inputs_ex]=parser(file)
     %coeff_up=[c1 c2 c3 c4 c5 c6_up c7 c8 c9 c10 c11 c12 c13_up c14];
     %coeff_down=[c1 c2 c3 c4 c5 c6_down c7 c8 c9 c10 c11 c12 c13_down c14];
     T={c',coeff'};              %use a symbol ' to transpose
-    
     inputs=[coeff,temp_ll,temp_lm,temp_lh];
     inputs_ex=[c6_down,c6_up,c13_down,c13_up];
 end

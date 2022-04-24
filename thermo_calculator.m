@@ -39,5 +39,4 @@ function [Cp,H,H_up,H_down,S]=thermo_calculator(inputs,inputs_ex)
         H_up = (c8 + c9*(T./2) + c10*(T.^2./3) + c11*(T.^3./4) + c12*(T.^4./5) +c13_up./T).*(R*T);
         S = (c8*log(T) + c9*T + c10*(T.^2./2) + c11*(T.^3./3) + c12*(T.^4./4 + c14)).*R ;
     end
-     
 end
