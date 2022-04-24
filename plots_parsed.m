@@ -28,7 +28,9 @@ function [P,Q,R]= plots_parsed(Cp,S,H,H_down,H_up,T,compound)
  
  plot(T,H_down,'linewidth',2,'color','magenta');
  plot(T,H_up,'linewidth',2,'color','red');
-
+ 
+ h=legend("Original value","Increased value","Decrease value")
+ 
  hold off
  
  %% ================creating folder and saving plots======================
