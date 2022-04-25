@@ -23,18 +23,16 @@ fclose(fileRec);
 
 file=fopen(thermoFile,'r');             %fopen is to return the integer number as the file identifier "r" to define that this is for reading
 fgetl(file);                                           %fgetl is to read only the first line of the file
+%------------------avoiding next three lines-------------------------------
+for i=1:3                                              %avoiding first 3 lines using for loop for n = 3
+    fgetl(file);
+end
 temp_data=fgetl(file);               
 %------------Global temperature--------------------------------------------
 t=strsplit(temp_data,' ');                             %strsplit is to split.
 temp_gl=str2double(t{2});                              %global low, medium and high are now extracted to array t and converted to double precision numbers using str2double function
 temp_gm=str2double(t{3});
 temp_gh=str2double(t{4});
-
-
-%------------------avoiding next three lines-------------------------------
-for i=1:3                                              %avoiding first 3 lines using for loop for n = 3
-    fgetl(file);
-end
 
 m=ftell(file);                                         %return the position pointer in the specified file
 c=0;
