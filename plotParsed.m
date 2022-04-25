@@ -1,4 +1,4 @@
-function [P,Q,R]= plots_parsed(Cp,S,H,H_down,H_up,T,compound)
+function [P,Q,R]= plotParsed(Cp,S,H,H_down,H_up,T,compound)
  
  
  name_compound=strrep(compound,'_','-');

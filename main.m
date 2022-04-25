@@ -22,7 +22,7 @@ fclose(fileRec);
 
 
 file=fopen(thermoFile,'r');             %fopen is to return the integer number as the file identifier "r" to define that this is for reading
-fgetl(file);                                           %fgetl is to read only the first line of the file
+fgetl(file);                                           %fgetl is to readTher only the first line of the file
 %------------------avoiding next three lines-------------------------------
 for i=1:3                                              %avoiding first 3 lines using for loop for n = 3
     fgetl(file);
@@ -64,12 +64,12 @@ x=input(prompt,'s');
 %% ========================================================================
 for i=1:nos
 
-    [temp,coeff,compound,inputs,inputs_ex]=parser(file);          %calling function
-    [Cp,H,H_up,H_down,S]=thermo_calculator(inputs,inputs_ex);                %calling function
+    [temp,coeff,compound,inputs,inputs_ex]=polConstParser(file);          %calling function
+    [Cp,H,H_up,H_down,S]=calculation(inputs,inputs_ex);                %calling function
     T=inputs(15):inputs(17);                            %temperature rangeTherm_N2O_NH3SCR-new.txt
 
     if strcmpi(x,compound)                              %compare strings (case insensitive)
-        [P,Q,R]= plots_parsed(Cp,S,H,H_down,H_up,T,compound);
+        [P,Q,R]= plotParsed(Cp,S,H,H_down,H_up,T,compound);
         lineSpecies=i;
         inputs_=inputs;
         inputs_ex_=inputs_ex;

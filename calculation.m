@@ -1,4 +1,4 @@
-function [Cp,H,H_up,H_down,S]=thermo_calculator(inputs,inputs_ex)
+function [Cp,H,H_up,H_down,S]=calculation(inputs,inputs_ex)
 
     c1=inputs(1);
     c2=inputs(2);

@@ -1,4 +1,4 @@
-function [temp,coeff,compound,inputs,inputs_ex]=parser(file)
+function [temp,coeff,compound,inputs,inputs_ex]=polConstParser(file)
 %%
     p=fgetl(file);
     line_1=p;
