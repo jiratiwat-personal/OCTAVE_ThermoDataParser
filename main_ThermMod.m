@@ -4,7 +4,8 @@ clear all                                              % Clear command history
 close all                                              % Closes all windows
 clc                                                    %Clears command window
 disp('--------------------------------------------------------------')
-disp('-- Sensitivity Analysis initializer for Thermodynamic data ---')
+disp('-  Sensitivity Analysis initializer for Thermodynamic data   -')
+disp('-                Modification date : 27.04.2022              -')
 disp('--------------------------------------------------------------')
 prompt=('Enter thermodynamic data file name: ');
 thermoFile=input(prompt,'s');
@@ -27,7 +28,7 @@ fgetl(file);                                           %fgetl is to readTher onl
 for i=1:3                                              %avoiding first 3 lines using for loop for n = 3
     fgetl(file);
 end
-temp_data=fgetl(file);               
+temp_data=fgetl(file);
 %------------Global temperature--------------------------------------------
 t=strsplit(temp_data,' ');                             %strsplit is to split.
 temp_gl=str2double(t{2});                              %global low, medium and high are now extracted to array t and converted to double precision numbers using str2double function
@@ -45,7 +46,7 @@ while ~feof(file)                                       %feof is to test and ret
         break
     end
 %    if contains(tline,'!')                              %skip the line when find exclaimation mark
-     if (tline == "!")                                   %this should be used instead 
+     if (tline == "!")                                   %this should be used instead
         continue
     else
         %disp(tline)
@@ -80,6 +81,7 @@ lineSpecies=(6+(lineSpecies-1)*4);
 dec=pwd;
 mkdir ('Thermo');
 cd ('Thermo')
+#Write decrement data
 fileRec = fopen(sprintf("%s_down.txt",x),'w');
 for i = 1:numel(A)
     if (i+1) == numel(A);
@@ -93,6 +95,25 @@ for i = 1:numel(A)
         fprintf(fileRec,'%15.8E%15.8E%15.8E%15.8E%15.8E%5d !c6 is decreased\n',inputs_ex_(1),inputs_(7),inputs_(8),inputs_(9),inputs_(10),3);
     elseif (i==lineSpecies+3)
         fprintf(fileRec,'%15.8E%15.8E%15.8E%15.8E               %5d !c13 is decreased\n',inputs_(11),inputs_(12),inputs_ex_(3),inputs_(14),4);
+    else
+        fprintf(fileRec,'%s\n',A{i});
+    end
+end
+fclose(fileRec);
+#Write increment data
+fileRec = fopen(sprintf("%s_up.txt",x),'w');
+for i = 1:numel(A)
+    if (i+1) == numel(A);
+        fprintf(fileRec,'%s',A{i});
+        break
+    elseif (i==lineSpecies)
+        fprintf(fileRec,'%s !Decrease value for this species\n',A{i});
+    elseif (i==lineSpecies+1)
+        fprintf(fileRec,'%15.8E%15.8E%15.8E%15.8E%15.8E%5d\n',inputs_(1),inputs_(2),inputs_(3),inputs_(4),inputs_(5),2);
+    elseif (i==lineSpecies+2)
+        fprintf(fileRec,'%15.8E%15.8E%15.8E%15.8E%15.8E%5d !c6 is increased\n',inputs_ex_(2),inputs_(7),inputs_(8),inputs_(9),inputs_(10),3);
+    elseif (i==lineSpecies+3)
+        fprintf(fileRec,'%15.8E%15.8E%15.8E%15.8E               %5d !c13 is increased\n',inputs_(11),inputs_(12),inputs_ex_(4),inputs_(14),4);
     else
         fprintf(fileRec,'%s\n',A{i});
     end
