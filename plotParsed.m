@@ -1,8 +1,7 @@
 function [P,Q,R]= plotParsed(Cp,S,H,H_down,H_up,T,compound)
-
-
  name_compound=strrep(compound,'_','-');
- figure('Name',sprintf('Thermodynamic Plots',1))
+ figure('Name',sprintf('Thermodynamic Plots',1),'Position', [100, 100, 1024, 1200]);
+
  subplot(1,3,1);
  P=plot(T,Cp,'linewidth',2,'color','blue');
  grid on
@@ -30,7 +29,7 @@ function [P,Q,R]= plotParsed(Cp,S,H,H_down,H_up,T,compound)
  plot(T,H_up,'linewidth',2,'color','red');
 
  h=legend("Original","Decrement","Increment");
-
+ legend (h, "location", "northeast");
  hold off
 
  %% ================creating folder and saving plots======================
