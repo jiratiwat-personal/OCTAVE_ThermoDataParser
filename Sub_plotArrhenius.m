@@ -21,32 +21,42 @@ E1=reaction1(3)
 E2=reaction2(3)
 
 #Initialization
-Tstart = 50;
-dT = 50;
-Tend = 3000;
-N=Tend/50;
+Tstart = 300;
+N = 50;
+Tend = 900;
+dT=(Tend-Tstart)/50;
 T = Tstart + (0:N-1)*dT;
 TRecip=T;
-TRecip=1./TRecip*1000;
-k1=(0:59)*0;
-k2=(0:59)*0;
+TRecip=1./TRecip;
+k1=(0:N-1)*0;
+k2=(0:N-1)*0;
 
 #Arrhenius temperature dependence rate constant
-for i=1:60
-  k1(i)=A1*power(T(i),N1)*exp(-E1/(R*T(i)));
-  k2(i)=A2*power(T(i),N2)*exp(-E2/(R*T(i)));
+for i=1:N
+  k1(i)=A1*power(T(i),N1)*exp(-E1/(R*(1e-3)*T(i)));
+  k2(i)=A2*power(T(i),N2)*exp(-E2/(R*(1e-3)*T(i)));
 end
-k1ln=log(k1);
-k2ln=log(k2);
+lnk1=log(k1);
+lnk2=log(k2);
 
-answer=power(2,2)
+#Manual calculation
+Stick=5e-2;
+SDEN=6.9581E-10;
+T=[300,900];
+rT=1./T;
+Wk=42.08;
+R=8.314;
+Pi=3.14;
+kf=Stick*((2)/(SDEN^(3)))*sqrt((R*(1e-3)*T)/(2*Pi*Wk));
+lnkf=log(kf);
 
 #Plotting value
-x1=k1ln;
-x2=k2ln;
-semilogx (T,x1,";reaction1;",T,x2,";reaction2;");
-legend ("location", "northeast");
+x1=lnk1;
+x2=lnk2;
+plot (TRecip,x1,";SIM;",rT,lnkf,";CAL;");
+%plot (TRecip,x1,";SIM;",TRecip,x2,";reaction2;",rT,lnkf,";CAL;");
+%legend ("location", "northeast");
 title ("Arrhenius plot","fontsize",15)
-xlabel("Temperature [K]","fontsize",15);
-ylabel("Kln","fontsize",15);
+xlabel("1/T [1/K]","fontsize",15);
+ylabel("lnK","fontsize",15);
 grid on;
