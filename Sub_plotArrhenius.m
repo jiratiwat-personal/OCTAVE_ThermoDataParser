@@ -2,17 +2,16 @@
 prompt=('Enter A N and E for reaction1: ');
 strReaction1=input(prompt,'s');
 reaction1=str2double(strsplit(strReaction1));
-prompt=('Enter A N and E for reaction2: ');
-strReaction2=input(prompt,'s');
-reaction2=str2double(strsplit(strReaction2));
+#prompt=('Enter A N and E for reaction2: ');
+#strReaction2=input(prompt,'s');
+#reaction2=str2double(strsplit(strReaction2));
 
 #Constant
 R=[8.31451e0];
 P=[1.0133e5];
 
 #Arrhenius paramters
-#reaction1=[+1.284751E20, -1.026757E00, +1.785516E02];
-#reaction2=[+1.848080E20, -1.074854E00, +1.787606E02];
+#reaction1=[+3.757212E09  +3.970763E00  +2.926868E01];
 A1=reaction1(1)
 A2=reaction2(1)
 N1=reaction1(2)
@@ -48,15 +47,19 @@ Wk=42.08;
 R=8.314;
 Pi=3.14;
 kf=Stick*((2)/(SDEN^(3)))*sqrt((R*(1e-3)*T)/(2*Pi*Wk));
-lnkf=log(kf);
+lnkr=log(kr);
 
 #Plotting value
 x1=lnk1;
 x2=lnk2;
-plot (TRecip,x1,";SIM;",rT,lnkf,";CAL;");
+plot (TRecip,x1,";Parser;","color","k")#black
+hold on;
+plot (rT,lnkr,";Manual Continuous;","color","b")#blue
+hold on;
+plot (rT,lnkr_,";Manual Original;","color","r")#red
 %plot (TRecip,x1,";SIM;",TRecip,x2,";reaction2;",rT,lnkf,";CAL;");
 %legend ("location", "northeast");
 title ("Arrhenius plot","fontsize",15)
 xlabel("1/T [1/K]","fontsize",15);
-ylabel("lnK","fontsize",15);
+ylabel("lnKr","fontsize",15);
 grid on;
